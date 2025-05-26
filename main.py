@@ -1,7 +1,8 @@
 from graphics import Window, Line, Point
+from cell import Cell
 
 if __name__ == "__main__":
     win = Window(800, 600)
-    l1 = Line(Point(100, 100), Point(500, 500))
-    win.draw_line(l1, "red")
+    c1 = Cell(win)
+    c1.draw(50,50,80,80)
     win.wait_for_close()

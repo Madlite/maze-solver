@@ -10,7 +10,7 @@ class Window:
         self.__canvas.pack(fill=BOTH, expand=1)
         self.__running = False
 
-    def draw_line(self, line, fill_color):
+    def draw_line(self, line, fill_color="black"):
         line.draw(self.__canvas, fill_color)
 
     def redraw(self):
@@ -40,5 +40,5 @@ class Line:
         self.p1 = p1
         self.p2 = p2
 
-    def draw(self, canvas, fill_color="black"):
+    def draw(self, canvas, fill_color):
         canvas.create_line(self.p1.x, self.p1.y, self.p2.x, self.p2.y, fill=fill_color, width=2)

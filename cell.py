@@ -30,3 +30,15 @@ class Cell:
         if self.has_bottom_wall:
             line = Line(Point(x1, y2), Point(x2, y2))
             self.__win.draw_line(line)
+
+    def draw_move(self, to_cell, undo=False):
+        x_diff = (self.__x2 - self.__x1) / 2
+        y_diff = (self.__y2 - self.__y1) / 2
+        p1_middle = Point(self.__x1 + x_diff, self.__y1 + y_diff)
+        
+        x_diff = (to_cell.__x2 - to_cell.__x1) / 2
+        y_diff = (to_cell.__y2 - to_cell.__y1) / 2
+        p2_middle = Point(to_cell.__x1 + x_diff, to_cell.__y1 + y_diff)
+
+        line = Line(p1_middle, p2_middle)
+        self.__win.draw_line(line)

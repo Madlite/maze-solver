@@ -10,5 +10,6 @@ if __name__ == "__main__":
     y_size = (y_win - x_offset - y_offset) / rows
     
     win = Window(x_win, y_win)
-    maze = Maze(x_offset, y_offset, cols, rows, x_size, y_size, win)
+    maze = Maze(x_offset, y_offset, rows, cols, x_size, y_size, win)
+
     win.wait_for_close()

@@ -1,8 +1,9 @@
 from cell import Cell
 import time
+import random
 
 class Maze:
-    def __init__(self, x1, y1, num_rows, num_cols, cell_size_x, cell_size_y, win=None):
+    def __init__(self, x1, y1, num_rows, num_cols, cell_size_x, cell_size_y, win=None, seed=None):
         self.x1 = x1
         self.y1 = y1
         self.num_rows = num_rows
@@ -13,6 +14,8 @@ class Maze:
         self.__cells = []
         self.__create_cells()
         self.__break_entrance_and_exit()
+        if seed is not None:
+            random.seed(seed)
 
 
     def __create_cells(self):
@@ -36,7 +39,13 @@ class Maze:
         if self.win is None:
             return
         cell.draw(x1, y1, x2, y2)
-        self.animate()
+        self.__animate()
+
+
+    def __animate(self):
+        if self.win is None:
+            return
+        self.win.redraw()
 
 
     def __break_entrance_and_exit(self):
@@ -46,9 +55,21 @@ class Maze:
         self.__draw_cell(self.num_cols-1, self.num_rows-1)
 
 
-    def animate(self):
-        if self.win is None:
-            return
-        self.win.redraw()
+    def __break_walls_r(self, i, j):
+        self.__cells[i][j].__visited = True
+
+        while True:
+            not_visited = []
+            neighbors = [
+                self.__cells[i][j-1], # top
+                self.__cells[i][j+1], # bot
+                self.__cells[i-1][j], # left
+                self.__cells[i+1][j]  # right
+            ]
+
+            for neighbor in neighbors:
+                if not neighbor.__visited:
+                    not_visited.append(neighbor.x,neighbor.y)
+
 
 
